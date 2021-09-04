@@ -7,7 +7,40 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.get("/", (req, res) => {
-  res.render("index");
+  const blogs = [
+    {
+      title: "lorem ipsum dolor sit amet, consectetur adipiscing",
+      snippet: "lorem ipsum dolor sit amet lo",
+      author: "lorem ipsum ",
+      date: "sept 24, 2020",
+    },
+    {
+      title: "lorem ipsum dolor sit amet, consectetur adipiscing",
+      snippet: "lorem ipsum dolor sit amet lo",
+      author: "lorem ipsum ",
+      date: "sept 24, 2020",
+    },
+    {
+      title: "lorem ipsum dolor sit amet, consectetur adipiscing",
+      snippet: "lorem ipsum dolor sit amet lo",
+      author: "lorem ipsum ",
+      date: "sept 24, 2020",
+    },
+    {
+      title: "lorem ipsum dolor sit amet, consectetur adipiscing",
+      snippet: "lorem ipsum dolor sit amet lo",
+      author: "lorem ipsum ",
+      date: "sept 24, 2020",
+    },
+    {
+      title: "lorem ipsum dolor sit amet, consectetur adipiscing",
+      snippet: "lorem ipsum dolor sit amet lo",
+      author: "lorem ipsum ",
+      date: "sept 24, 2020",
+    },
+  ];
+
+  res.render("index", { blogs });
 });
 
 app.get("/about", (req, res) => {
@@ -28,5 +61,5 @@ app.get("/contact", (req, res) => {
 app.use((req, res) => {
   res.status(404).render("not-found");
 });
-
+app.use(express.static(__dirname));
 app.listen(3000);
