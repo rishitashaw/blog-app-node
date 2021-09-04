@@ -11,15 +11,22 @@ app.get("/", (req, res) => {
 });
 
 app.get("/about", (req, res) => {
-  res.sendFile("./views/about.html", { root: __dirname });
+  res.render("about");
 });
 
 app.get("/about-us", (req, res) => {
   res.redirect("/about");
 });
 
+app.get("/post", (req, res) => {
+  res.render("post");
+});
+app.get("/contact", (req, res) => {
+  res.render("contact");
+});
+
 app.use((req, res) => {
-  res.status(404).sendFile("./views/not-found.html", { root: __dirname });
+  res.status(404).render("not-found");
 });
 
 app.listen(3000);
