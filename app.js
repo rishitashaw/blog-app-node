@@ -5,6 +5,7 @@ const app = express();
 //register view engine configurations
 app.set("view engine", "ejs");
 app.set("views", "views");
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   const blogs = [
@@ -40,26 +41,26 @@ app.get("/", (req, res) => {
     },
   ];
 
-  res.render("index", { blogs });
+  res.render("index", { title: "home", blogs });
 });
 
 app.get("/about", (req, res) => {
-  res.render("about");
+  res.render("about", { title: "about" });
 });
 
 app.get("/blogs/create", (req, res) => {
-  res.render("create");
+  res.render("create", { title: "create blog" });
 });
 
 app.get("/post", (req, res) => {
-  res.render("post");
+  res.render("post", { title: "post" });
 });
 app.get("/contact", (req, res) => {
-  res.render("contact");
+  res.render("contact", { title: "contact" });
 });
 
 app.use((req, res) => {
   res.status(404).render("not-found");
 });
-app.use(express.static(__dirname));
+
 app.listen(3000);
