@@ -40,27 +40,53 @@ app.get("/", (req, res) => {
       date: "sept 24, 2020",
     },
   ];
-
-  res.render("index", { title: "home", blogs });
+  const header = {
+    img: "/assets/img/home-bg.jpg",
+    title: "WTF",
+    subtitle: "Hello Mf",
+  };
+  res.render("index", { title: "home", blogs, header });
 });
 
 app.get("/about", (req, res) => {
-  res.render("about", { title: "about" });
+  const header = {
+    img: "/assets/img/about-bg.jpg",
+    title: "About Me",
+    subtitle: "This is what I do.",
+  };
+  res.render("about", { title: "about", header });
 });
 
 app.get("/blogs/create", (req, res) => {
-  res.render("create", { title: "create blog" });
+  const header = {
+    img: "/assets/img/post-sample-image.jpg",
+    title: "Create Post",
+    subtitle: "Tell Us Something.",
+  };
+  res.render("create", { title: "create blog", header });
 });
 
 app.get("/post", (req, res) => {
   res.render("post", { title: "post" });
 });
+
 app.get("/contact", (req, res) => {
-  res.render("contact", { title: "contact" });
+  const header = {
+    img: "/assets/img/contact-bg.jpg",
+    title: "Contact Me",
+    subtitle: "Have questions? I have answers.",
+  };
+  res.render("contact", { title: "contact", header });
 });
 
 app.use((req, res) => {
-  res.status(404).render("not-found");
+  const header = {
+    img: "/assets/img/about-bg.jpg",
+    title: "404",
+    subtitle: "Are you lost?.",
+  };
+
+  res.status(404).render("not-found", { title: "404", header });
 });
 
 app.listen(3000);
