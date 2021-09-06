@@ -41,8 +41,8 @@ app.get("/", (req, res) => {
     },
   ];
   const header = {
-    img: "/assets/img/home-bg.jpg",
-    title: "WTF",
+    img: "home-bg",
+    title: "Before & After",
     subtitle: "Hello Mf",
   };
   res.render("index", { title: "home", blogs, header });
@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
 
 app.get("/about", (req, res) => {
   const header = {
-    img: "/assets/img/about-bg.jpg",
+    img: "about-bg",
     title: "About Me",
     subtitle: "This is what I do.",
   };
@@ -59,7 +59,7 @@ app.get("/about", (req, res) => {
 
 app.get("/blogs/create", (req, res) => {
   const header = {
-    img: "/assets/img/post-sample-image.jpg",
+    img: "post-sample-image",
     title: "Create Post",
     subtitle: "Tell Us Something.",
   };
@@ -72,7 +72,7 @@ app.get("/post", (req, res) => {
 
 app.get("/contact", (req, res) => {
   const header = {
-    img: "/assets/img/contact-bg.jpg",
+    img: "contact-bg",
     title: "Contact Me",
     subtitle: "Have questions? I have answers.",
   };
@@ -81,7 +81,7 @@ app.get("/contact", (req, res) => {
 
 app.use((req, res) => {
   const header = {
-    img: "/assets/img/about-bg.jpg",
+    img: "about-bg",
     title: "404",
     subtitle: "Are you lost?.",
   };
