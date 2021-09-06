@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 
 const app = express();
-
+const dbURI = process.env.DB_URI;
 //register view engine configurations
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -87,7 +87,7 @@ app.get("/contact", (req, res) => {
 
 app.use((req, res) => {
   const header = {
-    img: "about-bg",
+    img: "notfound-bg",
     title: "404",
     subtitle: "Are you lost?.",
   };
