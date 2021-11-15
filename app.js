@@ -1,96 +1,63 @@
-const express = require("express");
-const morgan = require("morgan");
-
+const express = require( "express" );
+const morgan = require( "morgan" );
+const mongoose = require( "mongoose" )
+const blogRoutes = require( "./blogRoutes" )
 const app = express();
-const dbURI = process.env.DB_URI;
+
+const dbURI = process.env.DB_URI
+
+// connecting to db
+mongoose.connect( dbURI,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  } )
+  .then( ( res ) => {
+    // listen to requests
+    app.listen( 3000 );
+    console.log( "Connected to database" )
+  } )
+  .catch( ( err ) => {
+    console.log( err )
+  } );
+
 //register view engine configurations
-app.set("view engine", "ejs");
-app.set("views", "views");
+app.set( "view engine", "ejs" );
+app.set( "views", "views" );
 
-app.listen(3000);
+app.use( express.static( "public" ) );
+app.use( express.urlencoded( { extended: true } ) );
+app.use( morgan( "dev" ) );
+app.use( blogRoutes )
 
-app.use(express.static("public"));
+app.get( '/', ( req, res ) => {
+  res.redirect( '/blogs' );
+} )
 
-app.use(morgan("dev"));
-
-app.get("/", (req, res) => {
-  const blogs = [
-    {
-      title: "lorem ipsum dolor sit amet, consectetur adipiscing",
-      snippet: "lorem ipsum dolor sit amet lo",
-      author: "lorem ipsum ",
-      date: "sept 24, 2020",
-    },
-    {
-      title: "lorem ipsum dolor sit amet, consectetur adipiscing",
-      snippet: "lorem ipsum dolor sit amet lo",
-      author: "lorem ipsum ",
-      date: "sept 24, 2020",
-    },
-    {
-      title: "lorem ipsum dolor sit amet, consectetur adipiscing",
-      snippet: "lorem ipsum dolor sit amet lo",
-      author: "lorem ipsum ",
-      date: "sept 24, 2020",
-    },
-    {
-      title: "lorem ipsum dolor sit amet, consectetur adipiscing",
-      snippet: "lorem ipsum dolor sit amet lo",
-      author: "lorem ipsum ",
-      date: "sept 24, 2020",
-    },
-    {
-      title: "lorem ipsum dolor sit amet, consectetur adipiscing",
-      snippet: "lorem ipsum dolor sit amet lo",
-      author: "lorem ipsum ",
-      date: "sept 24, 2020",
-    },
-  ];
-  const header = {
-    img: "home-bg",
-    title: "Before & After",
-    subtitle: "Hello Mf",
-  };
-  res.render("index", { title: "home", blogs, header });
-});
-
-app.get("/about", (req, res) => {
+app.get( "/about", ( req, res ) => {
   const header = {
     img: "about-bg",
     title: "About Me",
     subtitle: "This is what I do.",
   };
-  res.render("about", { title: "about", header });
-});
+  res.render( "about", { title: "about", header } );
+} );
 
-app.get("/blogs/create", (req, res) => {
-  const header = {
-    img: "post-sample-image",
-    title: "Create Post",
-    subtitle: "Tell Us Something.",
-  };
-  res.render("create", { title: "create blog", header });
-});
-
-app.get("/post", (req, res) => {
-  res.render("post", { title: "post" });
-});
-
-app.get("/contact", (req, res) => {
+app.get( "/contact", ( req, res ) => {
   const header = {
     img: "contact-bg",
     title: "Contact Me",
     subtitle: "Have questions? I have answers.",
   };
-  res.render("contact", { title: "contact", header });
-});
+  res.render( "contact", { title: "contact", header } );
+} );
 
-app.use((req, res) => {
+app.use( ( req, res ) => {
   const header = {
     img: "notfound-bg",
     title: "404",
     subtitle: "Are you lost?.",
   };
 
-  res.status(404).render("not-found", { title: "404", header });
-});
+  res.status( 404 ).render( "not-found", { title: "404", header } );
+} );

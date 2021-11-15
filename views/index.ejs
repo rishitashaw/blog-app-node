@@ -16,14 +16,14 @@
           <!-- Post preview-->
           <% if (blogs.length > 0) {%> <% blogs.forEach(blog => { %>
           <div class="post-preview">
-            <a href="/post">
+            <a href="/blogs/<%= blog._id%>">
               <h2 class="post-title"><%= blog.title %></h2>
               <h3 class="post-subtitle"><%= blog.snippet %></h3>
             </a>
             <p class="post-meta">
-              Posted by
+              Posted on
               <a href="#!"><%= blog.author %></a>
-              <%= blog.date %>
+              <%= blog.createdAt.toLocaleDateString("en-US") %>
             </p>
           </div>
           <!-- Divider-->
@@ -40,4 +40,5 @@
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
   </body>
+
 </html>
