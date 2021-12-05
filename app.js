@@ -4,7 +4,7 @@ const mongoose = require( "mongoose" )
 const blogRoutes = require( "./blogRoutes" )
 const app = express();
 
-const dbURI = process.env.DB_URI
+const dbURI = "mongodb+srv://theseregrets:Harvard123@blog-app.4kesn.mongodb.net/nodetuts?retryWrites=true&w=majority"
 
 // connecting to db
 mongoose.connect( dbURI,
